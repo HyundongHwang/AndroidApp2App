@@ -1,10 +1,13 @@
 <!-- TOC -->
 
 - [AndroidApp2App](#androidapp2app)
+    - [`MyAppA`](#myappa)
+    - [`MyAppB`](#myappb)
 - [데모](#데모)
 - [Activity 로 Intent 전달](#activity-로-intent-전달)
 - [Service 로 Intent 전달](#service-로-intent-전달)
 - [Messenger 로 Message 전달](#messenger-로-message-전달)
+- [결론](#결론)
 
 <!-- /TOC -->
 
@@ -16,12 +19,36 @@
 - Service 로 Intent 전달
 - Messenger 로 Message 전달
 
-AIDL을 이용한 통신도 테스트 하려고 했지만, 인터페이스 구현체를 jar로 공유하는 등 여러가지로 손이 많이 가서 이건 제외하기로 했다.
+AIDL을 이용한 통신도 테스트 하려고 했지만, 인터페이스 구현체를 jar로 공유하는 등 여러가지로 손이 많이 가서 이건 제외하기로 했다. <br>
+
+<br>
+<br>
+<br>
+
+## `MyAppA` 
+호스트에 해당하는 앱으로 메시지를 수신하고 프로세싱해서 리턴하는 역할이다. <br> 
+Activity 통신에서는 잠깐 화면이 보이는데 다른 시나리오에서는 화면이 아예 보이지 않는다. 
+
+<br>
+<br>
+<br>
+
+## `MyAppB` 
+게스트에 해당하는 앱으로 메시지를 송신하고 결과를 기다렸다가 화면에 출력하는 역할을 한다. <br>
+송신자의 pkgName, clsName을 함께 송신하여 결과메시지를 수신할수 있도록 하였다. 
+
+<br>
+<br>
+<br>
 
 # 데모
 데모는 `deploy/MyAppA-release.apk`, `deploy/MyAppB-release.apk` 를 설치받아서 바로 실행해 볼수 있다.
 
 ![](https://s10.postimg.org/ll1jpmvmx/Kakao_Talk_20180212_134410278.png)
+
+<br>
+<br>
+<br>
 
 # Activity 로 Intent 전달
 
@@ -126,3 +153,12 @@ endnote
 -->
 
 ![](http://www.plantuml.com/plantuml/png/RL8nRiCm3Dpr2Y9BXwBf7Y15d4uPtAKle2pM4QfGXYJRyEzBkxOSfzKawOvtF56dc32azkQK8aus3L0EHTCK-t8eAKRYci8dXSvM11W1DwpplaJBHPLiDzu9hfMwiay4lgCW9v1LELjzmqwq3DnY3LgOSyaEr4InNp2Rl7jc4jGp78_0hNCJOT89XAByXvW9dhSO6JXay4uX1uF-5RHbaoDAEZEslqc1wbVyBCmxmKUn30HARU0LU8gpoK9ONJIyl072OINlbsVwfuMLT4KsZiOprZJtr0HVoSLKcmrmDD1YC8qvJ-ePcFhomKJFEJ-elt2IEUT4niR6uR0KPVMJxEJh_000)
+
+<br>
+<br>
+<br>
+
+# 결론
+GUI 가 연동동작하는 시나리오는 `Activity 로 Intent 전달` 이 가장 적당하다. 구현도 가장 쉽다. <br>
+통신 속도가 중요하다면 `Messenger 로 Message 전달` 가 가장 빠르다. <br> `Activity 로 Intent 전달` <<< `Service 로 Intent 전달` < `Messenger 로 Message 전달`
+
